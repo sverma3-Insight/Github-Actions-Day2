@@ -1,0 +1,29 @@
+name: CI Demo
+
+on:
+  pull_request:
+
+jobs:
+  demo-job:
+    runs-on: ubuntu-latest
+
+    env:
+      ENV_NAME: DEV
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show Variable
+        run: echo $ENV_NAME
+
+      - name: Use Secret
+        run: echo "Secret received"
+
+      - name: Create Artifact
+        run: echo "GitHub Actions Lab" > artifact.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-artifact
+          path: artifact.txt
